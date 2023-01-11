@@ -32,18 +32,20 @@ public class MainActivity extends AppCompatActivity {
                 String isian_nama_depan = edNamaDepan.getText().toString();
                 String isian_nama_belakang = edNamaBelakang.getText().toString();
 
-                if(isian_nama_depan.isEmpty()){
-                    Toast.makeText(getApplicationContext(), "Isian masih kosong", Toast.LENGTH_SHORT).show();
-                }else{
+                if (isian_nama_depan.isEmpty()) {
+                    Toast.makeText(getApplicationContext(),"Isian masih kosong",Toast.LENGTH_SHORT).show();
+                } else {
                     String nama_lengkap = isian_nama_depan.concat(" ").concat(isian_nama_belakang);
                     daftar_nama.clear();
                     daftar_nama.add(nama_lengkap);
                     edNamaDepan.setText("");
                     edNamaBelakang.setText("");
-                    intent_list.putStringArrayListExtra("daftar_nama", daftar_nama);
+                    intent_list.putStringArrayListExtra("daftar_nama",daftar_nama);
                     startActivity(intent_list);
                 }
+
             }
+
         });
     }
 }
