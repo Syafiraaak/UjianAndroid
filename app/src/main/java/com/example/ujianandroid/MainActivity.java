@@ -13,6 +13,8 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
+    int inputUmur;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,17 +22,19 @@ public class MainActivity extends AppCompatActivity {
 
         EditText edNamaDepan = (EditText) findViewById(R.id.edNamaDepan);
         EditText edNamaBelakang = (EditText) findViewById(R.id.edNamaBelakang);
+        EditText edUmur = (EditText) findViewById(R.id.edUmur);
         Button btnSimpan = (Button) findViewById(R.id.btnSimpan);
 
         ArrayList<String> daftar_nama = new ArrayList<>();
 
-        Intent intent_list = new Intent(MainActivity.this, ListActivity.class);
+        Intent intent_list = new Intent(MainActivity.this,ListActivity.class);
 
         btnSimpan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String isian_nama_depan = edNamaDepan.getText().toString();
                 String isian_nama_belakang = edNamaBelakang.getText().toString();
+                String isian_nama_umur = edUmur.getText().toString();
 
                 if (isian_nama_depan.isEmpty()) {
                     Toast.makeText(getApplicationContext(),"Isian masih kosong",Toast.LENGTH_SHORT).show();
@@ -40,12 +44,21 @@ public class MainActivity extends AppCompatActivity {
                     daftar_nama.add(nama_lengkap);
                     edNamaDepan.setText("");
                     edNamaBelakang.setText("");
+                    edUmur.setText("");
                     intent_list.putStringArrayListExtra("daftar_nama",daftar_nama);
                     startActivity(intent_list);
                 }
-
+                inputUmur = Integer.parseInt(((EditText) edUmur).getText().toString());
+                if (inputUmur <= 5) {
+                    edUmur.setText("Status:anak");
+                } else if (inputUmur < 20) {
+                    edUmur.setText("Status:remaja");
+                } else if (inputUmur < 40) {
+                    edUmur.setText("Status:dewasa");
+                } else if (inputUmur < 40) {
+                    edUmur.setText("Status:Tua");
+                }
             }
-
         });
     }
 }
